@@ -1,7 +1,11 @@
 import yfinance as yf
 import openpyxl
 
-Lista = ["AAPL", "MSFT", "GOOGL", "AMZN", "FB", "TSLA", "NVDA", "PYPL", "ADBE", "NFLX"]
+Lista = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "PYPL", "ADBE", "NFLX"]
+
+workbook = openpyxl.Workbook()
+sheet = workbook.active
+workbook.save("Planilha.xlsx")
 
 # 1. Função para obter dados históricos de ações com yfinance
 def obter_dados_acao(ticker):
@@ -26,7 +30,10 @@ def salvar_dados_em_excel(dados, nome_arquivo):
         sheet = workbook.active
 
     # Encontrar a próxima coluna vazia
-    col_offset = sheet.max_column + 1
+    col_offset = sheet.max_column
+    
+    if (sheet.max_column != 1):
+        col_offset = sheet.max_column + 2 
 
     # Escrever cabeçalhos na nova coluna
     headers = ["Data", "Abertura", "Alta", "Baixa", "Fechamento", "Volume"]
@@ -45,6 +52,6 @@ def salvar_dados_em_excel(dados, nome_arquivo):
     print(f"Dados salvos com sucesso em {nome_arquivo}")
 
 # 3. Executar o código
-for ticker in Lista:   # Exemplo: ação da Apple
+for ticker in Lista:   
     dados = obter_dados_acao(ticker)
     salvar_dados_em_excel(dados, "Planilha.xlsx")
