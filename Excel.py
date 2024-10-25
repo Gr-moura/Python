@@ -8,18 +8,6 @@ def ReiniciarPlanilha():
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     
-    # Calcular as datas dos últimos 20 anos
-    fim = datetime.now()
-    inicio = fim - timedelta(days=20*365)
-    delta = timedelta(days=1)
-    
-    current_date = inicio
-    row = 1
-    while current_date <= fim:
-        sheet.cell(row=row, column=1, value=current_date.strftime('%Y-%m-%d'))
-        current_date += delta
-        row += 1
-    
     workbook.save("Planilha.xlsx")
 
 # 1. Função para obter dados históricos de ações com yfinance
@@ -34,7 +22,7 @@ def obter_dados_acao(ticker):
     return dados
 
 # 2. Função para salvar os dados em uma planilha Excel usando openpyxl
-def salvar_dados_em_excel(dados, nome_arquivo, primeira_vez=False):
+def salvar_dados_em_excel(dados, nome_arquivo):
     if dados.empty:
         print(f"Nenhum dado encontrado para salvar em {nome_arquivo}")
         return
@@ -61,19 +49,13 @@ def salvar_dados_em_excel(dados, nome_arquivo, primeira_vez=False):
     for i, header in enumerate(headers):
         sheet.cell(row=1, column=col_offset + i, value=header)
 
-    # Criar um dicionário para acesso rápido aos dados históricos
-    dados_dict = {index.strftime('%Y-%m-%d'): row for index, row in dados.iterrows()}
+    # Escrever os dados históricos na planilha
+    for row_idx, (index, row) in enumerate(dados.iterrows(), start=2):
+        data = index.strftime('%Y-%m-%d')
+        valores = [data, row['Open'], row['High'], row['Low'], row['Close'], row['Volume']]
+        for col_idx, valor in enumerate(valores):
+            sheet.cell(row=row_idx, column=col_offset + col_idx, value=valor)
 
-    # Escrever os dados históricos na planilha usando as datas existentes na coluna 1
-    for row_idx in range(2, sheet.max_row + 1):
-        data = sheet.cell(row=row_idx, column=1).value
-        if data in dados_dict:
-            row = dados_dict[data]
-            valores = [data, row['Open'], row['High'], row['Low'], row['Close'], row['Volume']]
-            for col_idx, valor in enumerate(valores):
-                sheet.cell(row=row_idx, column=col_offset + col_idx, value=valor)
-        else:
-            print(f"Erro: Dados não encontrados para a data {data}")
 
     # Salvar o arquivo Excel
     workbook.save(nome_arquivo)
@@ -81,8 +63,6 @@ def salvar_dados_em_excel(dados, nome_arquivo, primeira_vez=False):
 
 # Exemplo de uso
 ReiniciarPlanilha()
-primeira_vez = True
 for ticker in Lista:
     dados = obter_dados_acao(ticker)
-    salvar_dados_em_excel(dados, "Planilha.xlsx", primeira_vez)
-    primeira_vez = False
+    salvar_dados_em_excel(dados, "Planilha.xlsx")
