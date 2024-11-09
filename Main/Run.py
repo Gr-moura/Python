@@ -1,7 +1,7 @@
 import Excel
 import Backtest
 
-Lista = ["AAPL", "MSFT", "GOOGL", "AMZN"]
+Lista = ["BBS3.sa", "PETR4.sa", "VALE3.sa", "ITUB4.sa", "BBDC4.sa"]
 
 Excel.ReiniciarPlanilha()
 for ticker in Lista:
