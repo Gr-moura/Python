@@ -19,4 +19,5 @@ def criavetores(fim, ticker) :
         
     print(vetores)
 
-criavetores('2024-11-04', "AAPL")
+if __name__ == "__main__" :
+    criavetores('2024-11-04', "AAPL")
