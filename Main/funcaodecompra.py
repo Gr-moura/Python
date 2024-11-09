@@ -64,7 +64,7 @@ def funcaodevariasacoes(listadetickers, datainicio, datafim):
     compra = {}
 
     for ticker in listadetickers:
-        vesperado = classificador(criavetor(ticker, datainicio, datafim), vetoresantgos, price_change_indicator(ticker, datainicio, datafim) )
+        vesperado = classificador(criavetor(ticker, datainicio, datafim), vetoresantigos, price_change_indicator(ticker, datainicio, datafim) )
         compra[ticker] = vesperado
 
 
