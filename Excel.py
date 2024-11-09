@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import yfinance as yf
 import openpyxl
 
-Lista = ["AAPL", "MSFT", "GOOGL", "AMZN"]
+Lista = ["BBS3.sa", "PETR4.sa", "VALE3.sa", "ITUB4.sa", "BBDC4.sa", "ABEV3.sa", "WEGE3.sa", "VVAR3.sa", "MGLU3.sa", "BBAS3.sa", "GNDI3.sa", "LREN3.sa", "RENT3.sa", "JBSS3.sa", "NTCO3.sa", "HAPV3.sa", "CSNA3.sa", "IRBR3.sa", "BRFS3.sa", "CIEL3.sa", "ELET3.sa", "ELET6.sa", "CMIG4.sa", "SBSP3.sa", "BRKM5.sa", "USIM5.sa", "GGBR4.sa", "CSAN3.sa", "MRFG3.sa", "BTOW3.sa", "BRML3.sa", "CYRE3.sa", "MULT3.sa", "HYPE3.sa", "LAME4.sa", "QUAL3.sa", "BRAP4.sa", "CCRO3.sa", "ENBR3.sa", "EGIE3.sa", "CPFE3.sa", "TAEE11.sa", "SAPR4.sa", "CVCB3.sa", "AZUL4.sa", "GOLL4.sa", "B3SA3.sa", "IRBR3.sa", "BBSE3.sa", "SULA11.sa", "BBDC3.sa", "BBDC4.sa", "ITUB3.sa", "ITUB4.sa", "SANB11.sa", "BBAS3.sa", "BPAC11.sa", "BIDI11.sa", "BIDI4.sa", "BIDI3.sa", "BRSR6.sa", "ITSA3.sa", "ITSA4.sa", "ITUB3.sa", "ITUB4.sa", "BBDC3.sa", "BBDC4.sa", "SANB11.sa", "BBAS3.sa", "BPAC11.sa", "BIDI11.sa", "BIDI4.sa", "BIDI3.sa", "BRSR6.sa", "ITSA3.sa", "ITSA4.sa", "ITUB3.sa", "ITUB4.sa", "BBDC3.sa", "BBDC4.sa", "SANB11.sa", "BBAS3.sa", "BPAC11.sa",]
 
 def ReiniciarPlanilha():
     workbook = openpyxl.Workbook()
